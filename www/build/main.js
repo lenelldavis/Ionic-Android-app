@@ -34,11 +34,20 @@ var SignInPage = (function () {
         this.authService = authService;
     }
     SignInPage.prototype.login = function () {
-        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Inide Login',
+            buttons: ['Dismiss']
+        });
+        alert.present();
         this.facebook.login(['email'])
             .then(function (res) {
             var fc = __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-            _this.authService.facebook_signin(fc);
+            //this.authService.facebook_signin(fc);
+            __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().signInWithCredential(fc).then(function (fs) {
+                //alert('firebase accessed');
+            }).catch(function (f_err) {
+                //alert('firebased error');
+            });
         })
             .catch(function (e) { return console.log('Error logging into Facebook', e); });
     };
@@ -51,13 +60,10 @@ SignInPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
         selector: 'page-sign-in',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\sign-in\sign-in.html"*/'<!--\n  Generated template for the SignInPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>SignIn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <button ion-button (click)= "login()">Login with Facebook</button>\n\n</ion-content>\n'/*ion-inline-end:"C:\Test\OgreBook\src\pages\sign-in\sign-in.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_4__ionic_native_facebook__["a" /* Facebook */],
-        __WEBPACK_IMPORTED_MODULE_0__services_authentication__["a" /* AuthService */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_facebook__["a" /* Facebook */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__services_authentication__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__services_authentication__["a" /* AuthService */]) === "function" && _e || Object])
 ], SignInPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=sign-in.js.map
 
 /***/ }),
@@ -488,41 +494,54 @@ ProductService = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_firebase__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 
 var AuthService = (function () {
-    function AuthService() {
+    function AuthService(alertCtrl) {
+        this.alertCtrl = alertCtrl;
     }
     AuthService.prototype.signup = function (email, password) {
-        return __WEBPACK_IMPORTED_MODULE_0_firebase___default.a.auth().createUserWithEmailAndPassword(email, password);
+        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().createUserWithEmailAndPassword(email, password);
         //return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
     };
     AuthService.prototype.facebook_signin = function (fc) {
         //return firebase.auth().signInWithEmailAndPassword(email, password);
-        __WEBPACK_IMPORTED_MODULE_0_firebase___default.a.auth().signInWithCredential(fc).then(function (fs) {
-            alert('firebase accessed');
+        var alert = this.alertCtrl.create({
+            title: 'Inide Auth Facebook Login',
+            buttons: ['Dismiss']
+        });
+        alert.present();
+        __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().signInWithCredential(fc).then(function (fs) {
+            //alert('firebase accessed');
         }).catch(function (f_err) {
-            alert('firebased error');
+            //alert('firebased error');
         });
     };
     AuthService.prototype.getActiveUser = function () {
-        return __WEBPACK_IMPORTED_MODULE_0_firebase___default.a.auth().currentUser;
+        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().currentUser;
     };
     return AuthService;
 }());
 AuthService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])()
+    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["a" /* AlertController */]) === "function" && _a || Object])
 ], AuthService);
 
+var _a;
 //# sourceMappingURL=authentication.js.map
 
 /***/ })
