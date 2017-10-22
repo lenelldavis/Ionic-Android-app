@@ -444,8 +444,6 @@ var FIREBASE_CREDENTIALS = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__authentication__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -457,14 +455,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var ProductService = (function () {
     function ProductService(auth) {
         this.auth = auth;
-        this.userNode = this.auth.getActiveUser().uid;
-        this.productNode = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref('productList');
-        this.productUserNode = this.productNode.child(this.userNode);
     }
+    //private userNode = this.auth.getActiveUser().uid;
+    //private productNode = firebase.database().ref('productList');
+    //private productUserNode = this.productNode.child(this.userNode);
     //insert paramter for inventory item
     ProductService.prototype.addProduct = function (product) {
         //Insert parameters to add data to the users node.
@@ -479,9 +476,10 @@ var ProductService = (function () {
 }());
 ProductService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__authentication__["a" /* AuthService */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__authentication__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__authentication__["a" /* AuthService */]) === "function" && _a || Object])
 ], ProductService);
 
+var _a;
 //# sourceMappingURL=product.js.map
 
 /***/ }),
