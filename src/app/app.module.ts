@@ -49,7 +49,6 @@ firebase.initializeApp(FIREBASE_CREDENTIALS);
     Facebook,
     AuthService,
     ProductService,
-    //Create and Insert the FinalProductService
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
