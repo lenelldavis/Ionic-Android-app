@@ -1,5 +1,8 @@
 {
   "name": "OgreBook",
-  "app_id": "",
-  "type": "ionic-angular"
+  "app_id": "ec3b70d1",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
