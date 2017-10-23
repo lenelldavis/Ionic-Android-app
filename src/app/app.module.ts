@@ -17,6 +17,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {FIREBASE_CREDENTIALS} from '../firebase.credentials';
 import firebase from 'firebase';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 
 firebase.initializeApp(FIREBASE_CREDENTIALS);
 
@@ -33,6 +35,8 @@ firebase.initializeApp(FIREBASE_CREDENTIALS);
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
