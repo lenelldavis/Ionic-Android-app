@@ -90,7 +90,6 @@ var AuthService = (function () {
     };
     AuthService.prototype.getActiveUser = function () {
         //This is returning a user object
-        console.log("Firebase UId:" + __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().currentUser);
         return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().currentUser;
     };
     return AuthService;
@@ -146,7 +145,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var SignInPage = (function () {
+var SignInPage = SignInPage_1 = (function () {
     function SignInPage(navCtrl, fireAuth) {
         this.navCtrl = navCtrl;
         this.fireAuth = fireAuth;
@@ -155,12 +154,12 @@ var SignInPage = (function () {
     SignInPage.prototype.login = function () {
         var _this = this;
         this.fireAuth.auth.signInWithPopup(new __WEBPACK_IMPORTED_MODULE_4_firebase___default.a.auth.FacebookAuthProvider())
-            .then(function (res) {
-            console.log("Access token: " + res.user.uid);
-        }).then(
-        //uses an anonymous function to within the then statement to reset the root page
-        function () {
+            .then(function () {
             _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_0__tabs_tabs__["a" /* TabsPage */]);
+        }).catch(function (error) {
+            console.log(error); // not redirecting prodces an object with error.code and error.message
+            //Try implmenting a popup with a button that wil redirect
+            _this.navCtrl.setRoot(SignInPage_1);
         });
     };
     SignInPage.prototype.showUser = function () {
@@ -168,7 +167,7 @@ var SignInPage = (function () {
     };
     return SignInPage;
 }());
-SignInPage = __decorate([
+SignInPage = SignInPage_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
         selector: 'page-sign-in',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\sign-in\sign-in.html"*/'<!--\n  Generated template for the SignInPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>SignIn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <button ion-button (click)= "login()">Login with Facebook</button>\n  \n\n</ion-content>\n'/*ion-inline-end:"C:\Test\OgreBook\src\pages\sign-in\sign-in.html"*/,
     }),
@@ -176,6 +175,7 @@ SignInPage = __decorate([
         __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["a" /* AngularFireAuth */]])
 ], SignInPage);
 
+var SignInPage_1;
 //# sourceMappingURL=sign-in.js.map
 
 /***/ }),
@@ -240,12 +240,11 @@ var AddFinalProductPage = (function () {
 }());
 AddFinalProductPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-        selector: 'page-AddFinalProduct',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Add Product</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <form #f="ngForm" (ngSubmit)="addAnother(f)">\n    <ion-list>\n      <ion-item>\n        <ion-label floating>Item ID Number</ion-label>\n        <ion-input type="text" value="" ngModel name="id"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Name</ion-label>\n        <ion-input type="text" value="" ngModel name="name"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Count</ion-label>\n        <ion-input type="number" value="" ngModel name="count"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Price</ion-label>\n        <ion-input type="number" value="" ngModel name="price"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Description</ion-label>\n        <ion-textarea type="text" value="" ngModel name="description"></ion-textarea>\n      </ion-item>\n\n    </ion-list>\n\n    <button ion-button type="submit" color="secondary" [disabled]="!f.valid">Add Another</button>\n    \n    \n  </form>\n  <button ion-button color="primary" (click)="addProduct(f)" [disabled]="!f.valid">Finish</button>\n  <button ion-button color="danger" (click)="cancel(f)">Cancel</button>\n</ion-content>'/*ion-inline-end:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/
+        selector: 'page-AddFinalProduct',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Add Product</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <form #f="ngForm" (ngSubmit)="addAnother(f)">\n    <ion-list>\n      <ion-item>\n        <ion-label floating>Item ID Number</ion-label>\n        <ion-input type="text" ngModel name="id" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Name</ion-label>\n        <ion-input type="text" ngModel name="name" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Count</ion-label>\n        <ion-input type="number" ngModel name="count" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Price</ion-label>\n        <ion-input type="number" ngModel name="price" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Description</ion-label>\n        <ion-textarea type="text" ngModel name="description" required></ion-textarea>\n      </ion-item>\n\n    </ion-list>\n\n    <button ion-button type="submit" [disabled]="!f.valid">Add Another</button> \n    \n  </form>\n  <button ion-button color="primary" [disabled]="!f.valid" (click)="addProduct(f)" >Finish</button>\n  <button ion-button color="danger" (click)="cancel(f)">Cancel</button>\n</ion-content>'/*ion-inline-end:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_product__["a" /* ProductService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_product__["a" /* ProductService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__services_product__["a" /* ProductService */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* App */]])
 ], AddFinalProductPage);
 
-var _a, _b, _c;
 //# sourceMappingURL=AddFinalProduct.js.map
 
 /***/ }),
@@ -309,11 +308,17 @@ var DisplayFinalProductPage = DisplayFinalProductPage_1 = (function () {
     function DisplayFinalProductPage(navCtrl, productDatabase) {
         this.navCtrl = navCtrl;
         this.productDatabase = productDatabase;
+        this.product = {};
         this.decreaseCount = 1;
     }
     //Will only update the view when the page is pushed to the top of the stack
     DisplayFinalProductPage.prototype.ionViewWillEnter = function () {
         this.productList = this.productDatabase.getProductList();
+        //For some reason this list is still null
+        /* if (!this.productList[0] == undefined) {
+          console.log("The first itme is null");
+          this.dummyProduct();
+        } */
     };
     /*Updates the count of the Product Item depending on which list item is tapped.
     Currently takes in a value from the user. Compares the index to the array retrieved
@@ -331,16 +336,28 @@ var DisplayFinalProductPage = DisplayFinalProductPage_1 = (function () {
         this.productDatabase.removeProduct(this.productList[index].itemKey);
         this.navCtrl.setRoot(DisplayFinalProductPage_1);
     };
+    DisplayFinalProductPage.prototype.dummyProduct = function () {
+        var tempArray = [];
+        this.product.itemId = "0009";
+        this.product.itemName = "Product name";
+        this.product.itemCount = 10;
+        this.product.itemPrice = 9;
+        this.product.itemDescription = "Item Description.";
+        tempArray[0] = this.product;
+        tempArray[1] = this.product;
+        this.productList = tempArray;
+        console.log("Index 0: " + this.productList[0].itemName);
+    };
     return DisplayFinalProductPage;
 }());
 DisplayFinalProductPage = DisplayFinalProductPage_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-        selector: 'page-DisplayFinalProduct',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\DisplayFinalProduct\DisplayFinalProduct.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Inventory</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let product of productList; let i = index">\n\n      <ion-item no-lines>\n        <h2>{{product.itemName}} (#{{product.itemId}})</h2>\n        <p>{{product.itemDescription}}</p>\n      </ion-item>\n      <ion-item no-lines>\n        <div item-content item-start>\n          <h2>${{product.itemPrice}}</h2>\n        </div>\n        <button ion-button outline round item-end>{{product.itemCount}}</button>\n      </ion-item>\n      <ion-item>\n        <ion-label floating item-start>Enter Number</ion-label>\n        <ion-input type="number" value="" [(ngModel)]="decreaseCount" item-start></ion-input>\n        <button ion-button color="secondary" (click)="updateCount(i)" item-end>\n          <ion-icon name="ion-refresh"></ion-icon>\n          Item Sold\n        </button>\n        <button ion-button color="danger" (click)="deleteItem(i)" item-end>\n          <ion-icon name="ion-trash-a"> </ion-icon>\n          Delete\n        </button>\n      </ion-item>\n      <!--       <ion-item-options>\n        <ion-input type="number" placeholder="2"></ion-input>\n        <button ion-button color="danger" (click)="updateCount(index)"><ion-icon name="ion-refresh"></ion-icon></button>\n      </ion-item-options> -->\n    </ion-item-sliding>\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Test\OgreBook\src\pages\DisplayFinalProduct\DisplayFinalProduct.html"*/
+        selector: 'page-DisplayFinalProduct',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\DisplayFinalProduct\DisplayFinalProduct.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Inventory</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let product of productList; let i = index">\n\n      <ion-item no-lines>\n        <h2>{{product.itemName}} (#{{product.itemId}})</h2>\n        <p>{{product.itemDescription}}</p>\n      </ion-item>\n      <ion-item no-lines>\n        <div item-content item-start>\n          <h2>${{product.itemPrice}}</h2>\n        </div>\n        <button ion-button outline round item-end>{{product.itemCount}}</button>\n      </ion-item>\n      <ion-item>\n        <ion-label floating item-start>Enter Number</ion-label>\n        <ion-input type="number" value="" [(ngModel)]="decreaseCount" item-start></ion-input>\n        <button ion-button color="secondary" (click)="updateCount(i)" item-end>\n          <ion-icon name="ion-refresh"></ion-icon>\n          Item Sold\n        </button>\n        <button ion-button color="danger" (click)="deleteItem(i)" item-end>\n          <ion-icon name="ion-trash-a"> </ion-icon>\n          Delete\n        </button>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button color="danger" (click)="deleteItem(i)">\n          <ion-icon name="ion-trash-a"></ion-icon>\n          Delete\n        </button>\n        <ion-input type="number" value="" [(ngModel)]= "decreaseCount"></ion-input>\n        <button ion-button color="secondary" (click)="updateCount(i)">\n          <ion-icon name="logo-usd"></ion-icon>\n          Sold\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Test\OgreBook\src\pages\DisplayFinalProduct\DisplayFinalProduct.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__services_product__["a" /* ProductService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__services_product__["a" /* ProductService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__services_product__["a" /* ProductService */]])
 ], DisplayFinalProductPage);
 
-var DisplayFinalProductPage_1, _a, _b;
+var DisplayFinalProductPage_1;
 //# sourceMappingURL=DisplayFinalProduct.js.map
 
 /***/ }),
