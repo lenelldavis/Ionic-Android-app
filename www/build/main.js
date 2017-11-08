@@ -269,8 +269,8 @@ var AddFinalProductPage = /** @class */ (function () {
         }
         else {
             console.log("Send to Database");
-            //this.productDatabase.addProduct(this.product);
-            //form.resetForm();
+            this.productDatabase.addProduct(this.product);
+            form.resetForm();
         }
     };
     AddFinalProductPage.prototype.checkNull = function () {
@@ -287,12 +287,11 @@ var AddFinalProductPage = /** @class */ (function () {
     };
     AddFinalProductPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-AddFinalProduct',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Add Product</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <form #form="ngForm" (ngSubmit)="addAnother(form)">\n    <ion-list>\n      <ion-item>\n        <ion-label floating>Item ID Number</ion-label>\n        <ion-input type="text" [ngModel]="product.itemId" name="id" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Name</ion-label>\n        <ion-input type="text" [ngModel]="product.itemName" name="name" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Count</ion-label>\n        <ion-input type="number" [ngModel]="product.itemCount" name="count" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Price</ion-label>\n        <ion-input type="number" [ngModel]="product.itemPrice" name="price" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Description</ion-label>\n        <ion-textarea type="text" [ngModel]="product.itemDescription" name="description" required></ion-textarea>\n      </ion-item>\n\n    </ion-list>\n\n    <button [disabled]="!form.form.valid" ion-button outline type="submit" >Add Another</button> \n    \n  </form>\n  <button ion-button color="primary" [disabled]="!form.form.valid" (click)="addProduct(form)" >Finish</button>\n  <button ion-button color="danger" (click)="cancel(form)">Cancel</button>\n</ion-content>'/*ion-inline-end:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/
+            selector: 'page-AddFinalProduct',template:/*ion-inline-start:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Add Product</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <form #form="ngForm" (ngSubmit)="addAnother(form)">\n    <ion-list>\n      <ion-item>\n        <ion-label floating>Item ID Number</ion-label>\n        <ion-input type="text" [ngModel]="product.itemId" name="id" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Name</ion-label>\n        <ion-input type="text" [ngModel]="product.itemName" name="name" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Count</ion-label>\n        <ion-input type="number" [ngModel]="product.itemCount" name="count" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Price</ion-label>\n        <ion-input type="number" [ngModel]="product.itemPrice" name="price" required></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label floating>Item Description</ion-label>\n        <ion-textarea type="text" [ngModel]="product.itemDescription" name="description"></ion-textarea>\n      </ion-item>\n\n    </ion-list>\n\n    <button [disabled]="!form.form.valid" ion-button outline type="submit" >Add Another</button> \n    \n  </form>\n  <button ion-button color="primary" [disabled]="!form.form.valid" (click)="addProduct(form)" >Finish</button>\n  <button ion-button color="danger" (click)="cancel(form)">Cancel</button>\n</ion-content>'/*ion-inline-end:"C:\Test\OgreBook\src\pages\AddFinalProduct\AddFinalProduct.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_product__["a" /* ProductService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_product__["a" /* ProductService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__services_product__["a" /* ProductService */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */]])
     ], AddFinalProductPage);
     return AddFinalProductPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=AddFinalProduct.js.map
