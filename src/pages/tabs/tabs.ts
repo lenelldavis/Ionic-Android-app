@@ -1,5 +1,3 @@
-import { FinalProduct } from './../../models/FinalProduct.interface';
-import { ProductService } from './../../services/product';
 import { Component } from '@angular/core';
 import { AddFinalProductPage } from '../AddFinalProduct/AddFinalProduct';
 import { ContactPage } from '../contact/contact';
@@ -13,10 +11,12 @@ export class TabsPage {
   tab1Root = DisplayFinalProductPage;
   tab2Root = AddFinalProductPage;
   tab3Root = ContactPage;
-  productList: FinalProduct[];
   
-  constructor(private productDatabase: ProductService) {
-
+  constructor() {
+   
   }
 
+  ionViewWillEnter(){
+    
+  }
 }

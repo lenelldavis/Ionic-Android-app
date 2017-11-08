@@ -2,15 +2,17 @@ import { ProductService } from '../services/product';
 import { AuthService } from '../services/authentication';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler, Tabs } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, Tabs, AlertController } from 'ionic-angular';
 import { MyApp } from './app.component';
 import {Facebook} from '@ionic-native/facebook';
+import {FormsModule} from '@angular/forms';
 
 import { AddFinalProductPage } from '../pages/AddFinalProduct/AddFinalProduct';
 import { ContactPage } from '../pages/contact/contact';
 import { DisplayFinalProductPage } from '../pages/DisplayFinalProduct/DisplayFinalProduct';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from './../pages/sign-in/sign-in';
+import { EditItemPage } from './../pages/edit-item/edit-item';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,13 +32,15 @@ firebase.initializeApp(FIREBASE_CREDENTIALS);
     ContactPage,
     DisplayFinalProductPage,
     TabsPage,
-    SignInPage
+    SignInPage,
+    EditItemPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireAuthModule,
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
+    FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +49,8 @@ firebase.initializeApp(FIREBASE_CREDENTIALS);
     ContactPage,
     DisplayFinalProductPage,
     TabsPage,
-    SignInPage
+    SignInPage,
+    EditItemPage
   ],
   providers: [
     StatusBar,
@@ -53,6 +58,7 @@ firebase.initializeApp(FIREBASE_CREDENTIALS);
     Facebook,
     AuthService,
     ProductService,
+    AlertController,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
