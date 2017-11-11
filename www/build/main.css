@@ -25709,3 +25709,7 @@ page-DisplayFinalProduct #styleItemCount {
 page-DisplayFinalProduct #styleDescription {
   word-wrap: break-word;
 }
+
+page-sign-in ion-content {
+  background-image: url("../assets/imgs/bg.png");
+}
