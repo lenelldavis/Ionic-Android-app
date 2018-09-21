@@ -1,6 +1,6 @@
 import { ProductService } from '../services/product';
 import { AuthService } from '../services/authentication';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, Injectable, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, AlertController } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -91,7 +91,8 @@ export class MyErrorHandler implements ErrorHandler {
     AuthService,
     ProductService,
     AlertController,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    IonicErrorHandler,
+    [{ provide: ErrorHandler, useClass: MyErrorHandler }]
   ]
 })
 export class AppModule {}
