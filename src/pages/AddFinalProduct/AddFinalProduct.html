@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Product</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="addAnother(form)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Item ID Number</ion-label>
+        <ion-input type="text" [ngModel]="product.itemId" name="id" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Item Name</ion-label>
+        <ion-input type="text" [ngModel]= "product.itemName" name="name" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Item Count</ion-label>
+        <ion-input type="number" [ngModel]="product.itemCount" name="count" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Item Price</ion-label>
+        <ion-input type="number" [ngModel]="product.itemPrice" name="price" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Item Description: 25 characters</ion-label>
+        <ion-textarea type="text" value="" maxlength="25" [ngModel]="product.itemDescription" name="description"></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+
+    <button [disabled]="!form.form.valid" ion-button outline type="submit" >Add Another</button> 
+    
+  </form>
+  <button ion-button color="primary" [disabled]="!form.form.valid" (click)="addProduct(form)" >Finish</button>
+  <button ion-button color="danger" (click)="cancel(form)">Cancel</button>
+</ion-content>

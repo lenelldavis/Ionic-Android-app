@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title start>Inventory</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="logout()">
+        Log Out
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let product of productList; let i = index">
+
+      <ion-item>
+        <ion-item no-lines>
+          <h2>{{product.itemName}} (#{{product.itemId}})</h2>
+          <div id="styleDescription">
+            <p>{{product.itemDescription}}</p>
+          </div>
+
+          <button item-end ion-button (click)="editItem(i)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-item no-lines>
+          <div item-content item-start>
+            <h2>${{product.itemPrice}}</h2>
+          </div>
+          <div item-end id="styleItemCount">{{product.itemCount}}</div>
+        </ion-item>
+      </ion-item>
+
+      <ion-item-options>
+        
+          <button id="styleDeleteButton" ion-button expandable icon-start color="danger" (click)="deleteItem(i)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+          <ion-input id="styleInputCount" type="number" value="" [(ngModel)]="decreaseCount"></ion-input>
+          <button id="styleSoldButton" ion-button expandable icon-start color ="primary" (click)="updateNumberToRemove()"> 
+            <ion-icon name="arrow-dropup-circle"></ion-icon>
+          </button>
+          <button id="styleSoldButton" ion-button icon-start color="secondary" (click)="updateCount(i)">
+            <ion-icon name="logo-usd"></ion-icon>
+            Sold
+          </button>
+        
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

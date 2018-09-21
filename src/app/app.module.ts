@@ -13,6 +13,7 @@ import { DisplayFinalProductPage } from '../pages/DisplayFinalProduct/DisplayFin
 import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from './../pages/sign-in/sign-in';
 import { EditItemPage } from './../pages/edit-item/edit-item';
+import { RegisterPage } from './../pages/register/register';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -33,7 +34,8 @@ firebase.initializeApp(FIREBASE_CREDENTIALS);
     DisplayFinalProductPage,
     TabsPage,
     SignInPage,
-    EditItemPage
+    EditItemPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ firebase.initializeApp(FIREBASE_CREDENTIALS);
     DisplayFinalProductPage,
     TabsPage,
     SignInPage,
-    EditItemPage
+    EditItemPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

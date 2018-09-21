@@ -59,7 +59,7 @@
     "@angular/cli": "^1.5.0",
     "@angular/common": "^4.4.3",
     "@angular/core": "^4.4.3",
-    "@ionic/app-scripts": "^3.1.0",
+    "@ionic/app-scripts": "^3.2.0",
     "@types/node": "^8.0.47",
     "angular": "^1.6.6",
     "angularfire2": "^5.0.0-rc.3",
