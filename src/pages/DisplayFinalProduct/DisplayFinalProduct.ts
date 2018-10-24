@@ -5,6 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { List, NavController, App } from 'ionic-angular';
 import firebase from 'firebase';
 import { EditItemPage } from '../edit-item/edit-item';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 @Component({
   selector: 'page-DisplayFinalProduct',
@@ -17,16 +18,34 @@ export class DisplayFinalProductPage {
   private decreaseCount: number = 1;
   @ViewChild(List) slider: List;
 
-  constructor(public navCtrl: NavController, 
-              private productDatabase: ProductService,
-              private app: App) {
+  constructor(public navCtrl: NavController,
+    private productDatabase: ProductService,
+    private app: App,
+    private admob: AdMobFree) {
     /*  */
   }
-  
+
   //Will only update the view when the page is pushed to the top of the stack
   ionViewWillEnter() {
     this.productList = this.productDatabase.getProductList();
 
+  }
+
+  ionViewDidEnter() {
+    const bannerConfig: AdMobFreeBannerConfig = {
+      //id:'ca-app-pub-7576476510022065/2900885612',
+      id: 'ca-app-pub-3940256099942544/6300978111',
+      isTesting: true,
+      autoShow: true
+    };
+    this.admob.banner.config(bannerConfig);
+
+    this.admob.banner.prepare()
+      .then(() => {
+        // banner Ad is ready
+        // if we set autoShow to false, then we will need to call the show method here
+      })
+      .catch(e => console.log(e));
   }
 
   /*Updates the count of the Product Item depending on which list item is tapped.
@@ -42,12 +61,12 @@ export class DisplayFinalProductPage {
 
     this.productDatabase.update(holdKey, holdProduct);
 
-    this.decreaseCount= 1;
+    this.decreaseCount = 1;
 
     this.slider.closeSlidingItems();
   }
 
-  updateNumberToRemove(){
+  updateNumberToRemove() {
     this.decreaseCount++;
   }
 
@@ -58,7 +77,7 @@ export class DisplayFinalProductPage {
   }
 
   /** Calls logs the user out and resets the main app page to SignIn */
-  logout(){
+  logout() {
     firebase.auth().signOut();
     this.app.getRootNav().setRoot(SignInPage);
   }
@@ -66,10 +85,10 @@ export class DisplayFinalProductPage {
   /** This will take in the information from the array and allow the user to edit
    * Get the product object from the array, pass that info to another page 
    */
-  editItem(index: number){
+  editItem(index: number) {
     let holdProduct = {} as FinalProduct;
     holdProduct = this.productList[index];
- 
+
     this.navCtrl.push(EditItemPage, holdProduct);
 
   }

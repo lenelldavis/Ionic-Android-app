@@ -1,10 +1,10 @@
+import { PasswordResetPage } from './../password-reset/password-reset';
 import { AuthService } from './../../services/authentication';
 import { RegisterPage } from './../register/register';
 import { User } from './../../models/user';
-import { Facebook } from '@ionic-native/facebook';
 import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import firebase from 'firebase';
 
 
@@ -17,74 +17,77 @@ export class SignInPage {
   user = {} as User;
 
   constructor(
-    public navCtrl: NavController,
-    public alertCtrl: AlertController, private auth: AuthService) {
+    public navCtrl: NavController, private alertCtrl: AlertController, private auth: AuthService,
+    private toastCtrl: ToastController) {
 
-      firebase.auth().onAuthStateChanged( user => {
-        if (user) {
-
-          this.navCtrl.setRoot(TabsPage);
-        } else {
-          console.log("There's no user here");
-        }
-      });
+    let toast = this.toastCtrl.create({
+      message: 'Please Sign In or Register.',
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
+
 
   /* Facebook login */
   login() {
     firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then(
-        
-        ()=>{
-          this.navCtrl.setRoot(TabsPage);        
+
+        () => {
+          this.navCtrl.setRoot(TabsPage);
         }
       ).catch(
-      (error)=> {
-        const alert = this.alertCtrl.create({
-          title: error.code,
-          subTitle: error.message,
-          buttons: ['Dismiss']
-        });
-        alert.present();
-        this.navCtrl.setRoot(SignInPage);
-      }
-    );  
-  
-/*     firebase.auth().signInWithRedirect(new firebase.auth.FacebookAuthProvider()).then(
-      () =>{
-        //Inside Anonymouse function
-        firebase.auth().getRedirectResult().then((result)=>{
-          
-          // The signed-in user info.
-          var user = result.user;
-          console.log(result);
-        }).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-        });
-      }
-    ).then(
-      ()=>{
-        console.log("Inside the promise");
-        this.navCtrl.setRoot(TabsPage);
-      }
-    ); */
+        (error) => {
+          const alert = this.alertCtrl.create({
+            title: error.code,
+            subTitle: error.message,
+            buttons: ['Dismiss']
+          });
+          alert.present();
+          this.navCtrl.setRoot(SignInPage);
+        }
+      );
+  }
+
+  /**Calls the Authentication Provider to sign the user in. */
+  emailLogin(user: User) {
+    let verifyErrorAlert = this.alertCtrl;
+    let newNavControl = this.navCtrl;
+    if (user.email == null || user.password == null) {
+      var signInError = this.alertCtrl.create({
+        title: "Sign In Error",
+        subTitle: 'Please enter an email address and a password.',
+        buttons: ['Dismiss']
+      });
+      signInError.present();
+    }
+    else {
+      this.auth.signIn(user.email, user.password)
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user && user.emailVerified) {
+          newNavControl.setRoot(TabsPage);
+        } else if (user && user.emailVerified == false) {
+          var verificationError = verifyErrorAlert.create({
+            title: "Sign In Error",
+            subTitle: 'Your email has not been verified. Also, restart the app.',
+            buttons: ['Dismiss']
+          });
+          verificationError.present();
+        }
+      });
+    }
 
   }
 
-  emailLogin(user: User){
-    this.auth.singIn(user.email, user.password)
-  }
-
-  register(){
+  /** Transitions to the Register Page */
+  register() {
     this.navCtrl.push(RegisterPage);
   }
 
+  /**Transitions to the Password Reset Page */
+  sendPasswordReset(user: User) {
+    this.navCtrl.push(PasswordResetPage);
+  }
 
 }

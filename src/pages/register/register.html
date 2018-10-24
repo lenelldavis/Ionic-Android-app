@@ -3,7 +3,7 @@ Ionic pages and navigation.
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register</ion-title>
+    <ion-title>Register for a New Account</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,23 +11,23 @@ Ionic pages and navigation.
 
 <ion-content padding>
 
-    <ion-item>
-        <ion-label floating>
-          Email Address
-        </ion-label>
-        <ion-input type="text" [(ngModel)]="user.email">
-    
-        </ion-input>
-      </ion-item>
-    
-      <ion-item>
-          <ion-label floating>
-            Password
-          </ion-label>
-          <ion-input type="password" [(ngModel)]="user.password">
-      
-          </ion-input>
-        </ion-item>
+  <ion-item>
+    <ion-label floating>
+      Email Address: (you@you.com)
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="user.email">
 
-        <button ion-button (click)="register(user)"> Register</button>
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>
+      Password: (At least 6 characters)
+    </ion-label>
+    <ion-input type="password" [(ngModel)]="user.password">
+
+    </ion-input>
+  </ion-item>
+
+  <button ion-button (click)="register(user)"> Register</button>
 </ion-content>

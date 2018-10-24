@@ -1,11 +1,12 @@
 import { ProductService } from '../services/product';
 import { AuthService } from '../services/authentication';
-import { NgModule, ErrorHandler, Injectable, Injector } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, AlertController } from 'ionic-angular';
 import { MyApp } from './app.component';
-import {Facebook} from '@ionic-native/facebook';
-import {FormsModule} from '@angular/forms';
+import { Facebook } from '@ionic-native/facebook';
+import { FormsModule } from '@angular/forms';
+import { AdMobFree } from '@ionic-native/admob-free';
 
 import { AddFinalProductPage } from '../pages/AddFinalProduct/AddFinalProduct';
 import { ContactPage } from '../pages/contact/contact';
@@ -14,20 +15,21 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SignInPage } from './../pages/sign-in/sign-in';
 import { EditItemPage } from './../pages/edit-item/edit-item';
 import { RegisterPage } from './../pages/register/register';
+import { PasswordResetPage } from './../pages/password-reset/password-reset';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {FIREBASE_CREDENTIALS} from '../firebase.credentials';
+import { FIREBASE_CREDENTIALS } from '../firebase.credentials';
 import firebase from 'firebase';
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 firebase.initializeApp(FIREBASE_CREDENTIALS);
 
 // These are all imports required for Pro Client with Monitoring & Deploy,
 // feel free to merge into existing imports above.
-import { Pro } from '@ionic/pro';
+/*import { Pro } from '@ionic/pro';
 
 Pro.init('e2663aac', {
   appVersion: '0.0.1'
@@ -52,7 +54,7 @@ export class MyErrorHandler implements ErrorHandler {
     // in development mode.
     this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
   }
-}
+}*/
 
 
 @NgModule({
@@ -64,7 +66,8 @@ export class MyErrorHandler implements ErrorHandler {
     TabsPage,
     SignInPage,
     EditItemPage,
-    RegisterPage
+    RegisterPage,
+    PasswordResetPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,8 @@ export class MyErrorHandler implements ErrorHandler {
     TabsPage,
     SignInPage,
     EditItemPage,
-    RegisterPage
+    RegisterPage,
+    PasswordResetPage
   ],
   providers: [
     StatusBar,
@@ -92,7 +96,8 @@ export class MyErrorHandler implements ErrorHandler {
     ProductService,
     AlertController,
     IonicErrorHandler,
-    [{ provide: ErrorHandler, useClass: MyErrorHandler }]
+    AdMobFree,
+    /* [{ provide: ErrorHandler, useClass: MyErrorHandler }]*/
   ]
 })
-export class AppModule {}
+export class AppModule { }
